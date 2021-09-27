@@ -17,6 +17,7 @@ const App = () => {
       id: Date.now(),
       title: input,
       done: false,
+      editable: false,
     }
     setTodos([...todos, newTodo])
     setInput('')
@@ -36,19 +37,32 @@ const App = () => {
   const handleDelete = (e, id) => {
     e.preventDefault()
     const deleteTodo = todos.filter((todo) => todo.id !== id)
-    console.log(deleteTodo)
     setTodos(deleteTodo)
   }
 
   const handleEdit = (e, id) => {
     e.preventDefault()
+
     const editTodo = todos.map((todo) => {
       if (todo.id === id) {
-        todo.title = input
+        todo.editable = !todo.editable
       }
       return todo
     })
+
     setTodos(editTodo)
+  }
+
+  const handleSaveEdit = (e, id, editValue) => {
+    e.preventDefault()
+    const saveEditTodo = todos.map((todo) => {
+      if (todo.id === id) {
+        todo.title = editValue
+        todo.editable = !todo.editable
+      }
+      return todo
+    })
+    setTodos(saveEditTodo)
   }
 
   return (
@@ -63,6 +77,7 @@ const App = () => {
         handleCheck={handleCheck}
         handleDelete={handleDelete}
         handleEdit={handleEdit}
+        handleSaveEdit={handleSaveEdit}
       />
     </div>
   )

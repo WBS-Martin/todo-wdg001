@@ -1,6 +1,7 @@
 import Task from './Task'
 
 const Tasklist = (props) => {
+  console.log(props)
   return (
     <div>
       {props.todos &&
@@ -11,6 +12,7 @@ const Tasklist = (props) => {
             handleCheck={props.handleCheck}
             handleDelete={props.handleDelete}
             handleEdit={props.handleEdit}
+            handleSaveEdit={props.handleSaveEdit}
           />
         ))}
     </div>
